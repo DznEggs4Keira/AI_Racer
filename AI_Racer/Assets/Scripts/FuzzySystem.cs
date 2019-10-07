@@ -102,7 +102,6 @@ namespace FuzzyForm
             double maxV = 5.0f;
 
             //a formulae i found in the book which seems to give the right output
-            //also commented the division bit since it makes the car even slower
             finalSteerVal = ((-maxV * steerL) + ((0.0f) * (1 - steerNC)) + (maxV * steerR));
         }
     }

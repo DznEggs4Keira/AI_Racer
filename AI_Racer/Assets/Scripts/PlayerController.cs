@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        position = transform.position;
     }
 
     // Update is called once per frame
