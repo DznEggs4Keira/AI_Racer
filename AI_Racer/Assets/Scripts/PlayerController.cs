@@ -7,12 +7,11 @@ public class PlayerController : MonoBehaviour
     float Horizontal; //what side is the player wanting to move the line to in the horizontal axis
     float amount = 3.5f; //by what speed it should move
 
-    public Vector2 position { get; private set; }
+    Vector2 position;
 
     // Start is called before the first frame update
     void Start()
     {
-        position = transform.position;
     }
 
     // Update is called once per frame

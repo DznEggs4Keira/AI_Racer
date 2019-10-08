@@ -74,14 +74,18 @@ namespace FuzzyForm
         void setMembershipFunc(float distance, float velocity)
         {
             //input 1 - distance between race line and race car
-            dLeft = F1.FuzzyReverseGrade(distance, -800, -0.5);
-            dCentre = F1.FuzzyTriangle(distance, -500, 0, 500);
-            dRight = F1.FuzzyGrade(distance, 0.5, 800);
+            dLeft = F1.FuzzyReverseGrade(distance, -10, -0.5);
+            dCentre = F1.FuzzyTriangle(distance, -5, 0, 5);
+            dRight = F1.FuzzyGrade(distance, 0.5, 10);
+
+            //Debug.Log("dLeft: " + dLeft + "/ndCentre: " + dCentre + "/ndRight: " + dRight);
 
             //input 2 - current velocity of race car
-            cTurnLeft = F1.FuzzyReverseGrade(velocity, -250, -0.5);
-            cNoChange = F1.FuzzyTriangle(velocity, -150, 0, 150);
-            cTurnRight = F1.FuzzyGrade(velocity, 0.5, 250);
+            cTurnLeft = F1.FuzzyReverseGrade(velocity, -150, -0.5);
+            cNoChange = F1.FuzzyTriangle(velocity, -50, 0, 50);
+            cTurnRight = F1.FuzzyGrade(velocity, 0.5, 150);
+            
+            //Debug.Log("cTurnLeft: " + cTurnLeft + "/ncNoChange: " + cNoChange + "/ndcTurnRight: " + cTurnRight);
 
         }
 
@@ -99,7 +103,7 @@ namespace FuzzyForm
         void Singleton()
         {
             //steering - the max value by which steering of the car can occur
-            double maxV = 5.0f;
+            double maxV = 150.0f;
 
             //a formulae i found in the book which seems to give the right output
             finalSteerVal = ((-maxV * steerL) + ((0.0f) * (1 - steerNC)) + (maxV * steerR));

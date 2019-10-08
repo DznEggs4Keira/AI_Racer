@@ -5,7 +5,7 @@ using UnityEngine;
 public class FuzzyController : MonoBehaviour
 {
     public GameObject player;
-    PlayerController controller;
+    public Vector2 playerPos;
 
     FuzzyForm.Fuzzy F1 = new FuzzyForm.Fuzzy();
 
@@ -15,27 +15,43 @@ public class FuzzyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        controller = player.GetComponent<PlayerController>();
-
-        //Set initial velocity and position
         car_velocity = new Vector2(30, 0);
-        //car_position = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // get most recent position
-        car_position = transform.position;
+        // get most recent positions of car and control line
+        car_position = this.transform.position;
+        playerPos = player.transform.position;
+
+        Debug.Log("Player Position: " + playerPos);
 
         //-Value means car is to the left, +Value means car is to the right -- distance
-        float distance = car_position.x - controller.position.x;
+        float distance = car_position.x - playerPos.x;
+        //Debug.Log("Distance: " + distance);
+
         float velocity = car_velocity.x;
+        //Debug.Log("Velocity: " + velocity);
 
         //send data
         F1.RunFuzzy(distance, velocity);
+        UpdateVelocity();
 
-        car_position.x += F1.ReturnVal() * Time.deltaTime; //Speed * Time
-        transform.position = car_position;
+        //Move
+        Move();
+    }
+    private void UpdateVelocity()
+    {
+        car_velocity.x += F1.ReturnVal() * Time.deltaTime;
+        //Debug.Log(car_velocity);
+    }
+
+    private void Move()
+    {
+        car_position += car_velocity * Time.deltaTime;
+
+        //set the new car position
+        this.transform.position = car_position;
     }
 }
