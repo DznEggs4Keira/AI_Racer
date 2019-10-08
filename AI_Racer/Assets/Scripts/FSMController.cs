@@ -1,21 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
-public class FuzzyController : MonoBehaviour
+public class FSMController : MonoBehaviour
 {
+
     public GameObject player;
     public Vector2 playerPos;
 
-    FuzzyForm.Fuzzy F1 = new FuzzyForm.Fuzzy();
+    FSMForm.FSMSystem F1 = new FSMForm.FSMSystem();
 
-    Vector2 car_velocity;
     Vector2 car_position;
 
     // Start is called before the first frame update
     void Start()
     {
-        car_velocity = new Vector2(30, 0);
     }
 
     // Update is called once per frame
@@ -31,25 +29,16 @@ public class FuzzyController : MonoBehaviour
         float distance = car_position.x - playerPos.x;
         //Debug.Log("Distance: " + distance);
 
-        float velocity = car_velocity.x;
-        //Debug.Log("Velocity: " + velocity);
-
         //send data
-        F1.RunFuzzy(distance, velocity);
-        UpdateVelocity();
+       float move = F1.RunFSM(distance);
 
         //Move
-        Move();
-    }
-    private void UpdateVelocity()
-    {
-        car_velocity.x += F1.ReturnVal() * Time.deltaTime;
-        //Debug.Log(car_velocity);
+        Move(move);
     }
 
-    private void Move()
+    private void Move(float deltaMove)
     {
-        car_position += car_velocity * Time.deltaTime;
+        car_position.x += deltaMove * Time.deltaTime;
 
         //set the new car position
         this.transform.position = car_position;
