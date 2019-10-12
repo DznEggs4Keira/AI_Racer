@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - ShowOnPause
+  - CarSelectFSM
+  - CarSelectFuzzy
   layers:
   - Default
   - TransparentFX

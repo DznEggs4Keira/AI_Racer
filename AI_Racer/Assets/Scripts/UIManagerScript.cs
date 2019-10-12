@@ -29,7 +29,7 @@ public class UIManagerScript : MonoBehaviour
             }
             else if (Time.timeScale == 0)
             {
-                Debug.Log("high");
+                //Debug.Log("high");
                 Time.timeScale = 1;
                 hidePaused();
             }
@@ -84,7 +84,7 @@ public class UIManagerScript : MonoBehaviour
     public void Exit()
     {
         //if called on any other scene, takes to main menu
-        if(SceneManager.GetActiveScene().buildIndex != 1)
+        if(SceneManager.GetActiveScene().name != "MainMenu")
         {
             SceneManager.LoadScene("MainMenu");
         }
