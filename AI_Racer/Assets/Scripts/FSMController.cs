@@ -44,10 +44,14 @@ public class FSMController : MonoBehaviour
         this.transform.position = car_position;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        //Call game over when collision
-        UIManagerScript script = UI.GetComponent<UIManagerScript>();
-        script.isGameOver = true;
+        if (collision.collider.tag == "Enemies")
+        {
+            Debug.Log("AAA i hit " + collision.gameObject.tag); //this is working
+            //Call game over when collision
+            UIManagerScript script = UI.GetComponent<UIManagerScript>();
+            script.Reload();
+        }
     }
 }

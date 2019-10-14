@@ -8,7 +8,7 @@ public class UIManagerScript : MonoBehaviour
     GameObject[] pauseObjects;
     GameObject[] gameOverObjects;
 
-    public bool isGameOver = false;
+    bool isGameOver = false;
 
     // Use this for initialization
     void Start()
@@ -25,20 +25,11 @@ public class UIManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!isGameOver)
-        {
             //uses the p button to pause and unpause the game
             if (Input.GetKeyDown(KeyCode.P))
             {
                 pauseControl();
             }
-        }
-
-        else if(isGameOver)
-        {
-            //Time.timeScale = 0;
-            GameOver();
-        }
     }
 
     //Reloads the Level
@@ -106,14 +97,6 @@ public class UIManagerScript : MonoBehaviour
         foreach(GameObject g in gameOverObjects)
         {
             g.SetActive(false);
-        }
-    }
-
-    void GameOver()
-    {
-        foreach (GameObject g in gameOverObjects)
-        {
-            g.SetActive(true);
         }
     }
 }
