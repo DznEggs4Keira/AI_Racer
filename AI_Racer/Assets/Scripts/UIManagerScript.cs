@@ -43,7 +43,7 @@ public class UIManagerScript : MonoBehaviour
         }
 
         //shows finish gameobjects if player is dead and timescale = 0
-        if (isGameOver == true)
+        if (/* Time.timeScale == 0 && */ isGameOver == true)
         {
             HideGameOver();
         }
@@ -65,8 +65,8 @@ public class UIManagerScript : MonoBehaviour
         }
         else if (Time.timeScale == 0)
         {
-            HidePaused();
             Time.timeScale = 1;
+            HidePaused();
         }
     }
 
