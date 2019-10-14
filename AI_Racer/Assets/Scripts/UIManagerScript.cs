@@ -6,33 +6,38 @@ using UnityEngine.SceneManagement;
 public class UIManagerScript : MonoBehaviour
 {
     GameObject[] pauseObjects;
+    GameObject[] gameOverObjects;
+
+    public bool isGameOver = false;
 
     // Use this for initialization
     void Start()
     {
         Time.timeScale = 1;
+
         pauseObjects = GameObject.FindGameObjectsWithTag("ShowOnPause");
+        gameOverObjects = GameObject.FindGameObjectsWithTag("GameOver");
+
+        hideGameOver();
         hidePaused();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        //uses the p button to pause and unpause the game
-        if (Input.GetKeyDown(KeyCode.P))
+        if(!isGameOver)
         {
-            if (Time.timeScale == 1)
+            //uses the p button to pause and unpause the game
+            if (Input.GetKeyDown(KeyCode.P))
             {
-                Time.timeScale = 0;
-                showPaused();
+                pauseControl();
             }
-            else if (Time.timeScale == 0)
-            {
-                //Debug.Log("high");
-                Time.timeScale = 1;
-                hidePaused();
-            }
+        }
+
+        else if(isGameOver)
+        {
+            //Time.timeScale = 0;
+            GameOver();
         }
     }
 
@@ -43,7 +48,7 @@ public class UIManagerScript : MonoBehaviour
     }
 
     //controls the pausing of the scene
-    public void pauseControl()
+    void pauseControl()
     {
         if (Time.timeScale == 1)
         {
@@ -93,6 +98,22 @@ public class UIManagerScript : MonoBehaviour
         else
         {
             Application.Quit();
+        }
+    }
+
+    void hideGameOver()
+    {
+        foreach(GameObject g in gameOverObjects)
+        {
+            g.SetActive(false);
+        }
+    }
+
+    void GameOver()
+    {
+        foreach (GameObject g in gameOverObjects)
+        {
+            g.SetActive(true);
         }
     }
 }

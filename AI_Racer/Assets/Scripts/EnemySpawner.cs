@@ -4,61 +4,70 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public float moveSpeed = -5f;
     public GameObject[] enemies;
+
+    float cameraY;
+    float reposPoint = 5f; // y/height of the new placement
+
+    Vector2 direction = new Vector2(0, -1);
+    float force = 300f;
+
     int randomEnemyIndex;
 
-    static float yOffset = -1.0f;
+    //for movement of enemies
+    GameObject tempEnemy;
+
+    void Awake()
+    {
+        cameraY = Camera.main.gameObject.transform.position.y - 15f;        
+    }
 
     // Update is called once per frame
     void Update()
     {
-        SpawnEnemies(); //can't call it here.... call every 10 seconds.... make a counter like ruby
+        Move();
+        Reposition();
+    }
+
+    void Move()
+    {
+        //move spawner
+        Vector3 temp = transform.position;
+        temp.y += moveSpeed * Time.deltaTime;
+        transform.position = temp;
+    }
+
+    void Reposition()
+    {
+        if(transform.position.y < cameraY)
+        {
+            Vector3 temp = transform.position;
+            temp.y = reposPoint;
+            transform.position = temp;
+
+            SpawnEnemies();
+        }
+    }
+
+    void MoveEnemy()
+    {
+        Rigidbody2D temp = tempEnemy.GetComponent<Rigidbody2D>();
+        temp.AddForce(direction * force);
     }
 
     void SpawnEnemies()
     {
-        if(Random.Range (0, 10) > 7)
+        if(Random.Range (0, 10) > 5)
         {
-           randomEnemyIndex = Random.Range(0, enemies.Length);
+            randomEnemyIndex = Random.Range(0, enemies.Length);
         }
 
         //Enemies
-        switch(randomEnemyIndex)
-        {
-            //Tires
-            case 0:
-                {
-                    Instantiate(enemies[randomEnemyIndex], new Vector3(0, transform.position.y, 0), Quaternion.identity);
-                    break;
-                }
-            //Car
-            case 1:
-                {
-                    Instantiate(enemies[randomEnemyIndex], new Vector3(3.2f, transform.position.y, 0), Quaternion.identity);
-                    break;
-                }
-            //Car
-            case 2:
-                {
-                    Instantiate(enemies[randomEnemyIndex], new Vector3(-1.2f, -transform.position.y, 0), Quaternion.identity);
-                    break;
-                }
-            //Car
-            case 3:
-                {
-                    Instantiate(enemies[randomEnemyIndex], new Vector3(2.2f, -transform.position.y, 0), Quaternion.identity);
-                    break;
-                }
-            //Car
-            case 4:
-                {
-                    Instantiate(enemies[randomEnemyIndex], new Vector3(-3.2f, transform.position.y, 0), Quaternion.identity);
-                    break;
-                }
-            default:
-                {
-                    break;
-                }
-        }
+        tempEnemy = Instantiate(enemies[randomEnemyIndex], new Vector3(Random.Range(-3, 3), transform.position.y, 0), Quaternion.identity);
+
+        MoveEnemy();
     }
 }
+
+

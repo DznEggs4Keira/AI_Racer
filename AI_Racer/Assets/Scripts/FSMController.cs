@@ -3,7 +3,7 @@ using System.Collections;
 
 public class FSMController : MonoBehaviour
 {
-
+    public GameObject UI;
     public GameObject player;
     public Vector2 playerPos;
 
@@ -42,5 +42,12 @@ public class FSMController : MonoBehaviour
 
         //set the new car position
         this.transform.position = car_position;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //Call game over when collision
+        UIManagerScript script = UI.GetComponent<UIManagerScript>();
+        script.isGameOver = true;
     }
 }

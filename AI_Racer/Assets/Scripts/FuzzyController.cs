@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FuzzyController : MonoBehaviour
 {
+    public GameObject UI;
     public GameObject player;
     public Vector2 playerPos;
 
@@ -53,5 +54,12 @@ public class FuzzyController : MonoBehaviour
 
         //set the new car position
         this.transform.position = car_position;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //Call game over when collision
+        UIManagerScript script = UI.GetComponent<UIManagerScript>();
+        script.isGameOver = true;
     }
 }

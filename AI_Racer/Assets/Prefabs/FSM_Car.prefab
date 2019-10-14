@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7587417788097124554}
   - component: {fileID: 6716457222519720392}
   - component: {fileID: 1497894077}
+  - component: {fileID: -7776164714649213797}
   m_Layer: 0
   m_Name: FSM_Car
   m_TagString: CarSelectFSM
@@ -93,5 +94,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: defe06f4bd96e5042b7c8a1e664c36b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  UI: {fileID: 8686477347430260212, guid: a7a3b3985bf541c4ea970750b901a224, type: 3}
+  player: {fileID: 5359793753188809950, guid: 70b7ec1cacef5664898018483a746ba0, type: 3}
   playerPos: {x: 0, y: 0}
+--- !u!61 &-7776164714649213797
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6446984860291119284}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.5, y: 2.5}
+    newSize: {x: 1.5, y: 2.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.8}
+  m_EdgeRadius: 0
