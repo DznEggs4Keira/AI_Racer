@@ -8,7 +8,7 @@ public class UIManagerScript : MonoBehaviour
     GameObject[] pauseObjects;
     GameObject[] gameOverObjects;
 
-    bool isGameOver = false;
+    public bool isGameOver = false;
 
     // Use this for initialization
     void Start()
@@ -18,18 +18,26 @@ public class UIManagerScript : MonoBehaviour
         pauseObjects = GameObject.FindGameObjectsWithTag("ShowOnPause");
         gameOverObjects = GameObject.FindGameObjectsWithTag("GameOver");
 
-        hideGameOver();
-        hidePaused();
+        HideGameOver();
+        HidePaused();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(isGameOver == true)
+        {
+            HideGameOver();
+        }
+
+        else
+        {
             //uses the p button to pause and unpause the game
             if (Input.GetKeyDown(KeyCode.P))
             {
-                pauseControl();
+                PauseControl();
             }
+        }
     }
 
     //Reloads the Level
@@ -39,22 +47,22 @@ public class UIManagerScript : MonoBehaviour
     }
 
     //controls the pausing of the scene
-    void pauseControl()
+    void PauseControl()
     {
         if (Time.timeScale == 1)
         {
             Time.timeScale = 0;
-            showPaused();
+            ShowPaused();
         }
         else if (Time.timeScale == 0)
         {
             Time.timeScale = 1;
-            hidePaused();
+            HidePaused();
         }
     }
 
     //shows objects with ShowOnPause tag
-    public void showPaused()
+    public void ShowPaused()
     {
         foreach (GameObject g in pauseObjects)
         {
@@ -63,7 +71,7 @@ public class UIManagerScript : MonoBehaviour
     }
 
     //hides objects with ShowOnPause tag
-    public void hidePaused()
+    public void HidePaused()
     {
         foreach (GameObject g in pauseObjects)
         {
@@ -92,11 +100,23 @@ public class UIManagerScript : MonoBehaviour
         }
     }
 
-    void hideGameOver()
+    public void HideGameOver()
     {
-        foreach(GameObject g in gameOverObjects)
+        if(isGameOver == true)
         {
-            g.SetActive(false);
+            foreach (GameObject g in gameOverObjects)
+            {
+                g.SetActive(true);
+            }
         }
+
+        else
+        {
+            foreach (GameObject g in gameOverObjects)
+            {
+                g.SetActive(false);
+            }
+        }
+        
     }
 }

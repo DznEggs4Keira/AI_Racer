@@ -9,6 +9,7 @@ TagManager:
   - CarSelectFuzzy
   - GameOver
   - Enemies
+  - Music
   layers:
   - Default
   - TransparentFX
