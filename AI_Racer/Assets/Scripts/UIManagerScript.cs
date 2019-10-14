@@ -8,7 +8,7 @@ public class UIManagerScript : MonoBehaviour
     GameObject[] pauseObjects;
     GameObject[] gameOverObjects;
 
-    public bool isGameOver = false;
+    public bool isGameOver;
 
     // Use this for initialization
     void Start()
@@ -18,6 +18,8 @@ public class UIManagerScript : MonoBehaviour
         pauseObjects = GameObject.FindGameObjectsWithTag("ShowOnPause");
         gameOverObjects = GameObject.FindGameObjectsWithTag("GameOver");
 
+        isGameOver = false;
+
         HideGameOver();
         HidePaused();
     }
@@ -25,18 +27,25 @@ public class UIManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isGameOver == true)
+        //uses the p button to pause and unpause the game
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            HideGameOver();
+            if (Time.timeScale == 1 && isGameOver == false)
+            {
+                Time.timeScale = 0;
+                ShowPaused();
+            }
+            else if (Time.timeScale == 0 && isGameOver == false)
+            {
+                Time.timeScale = 1;
+                HidePaused();
+            }
         }
 
-        else
+        //shows finish gameobjects if player is dead and timescale = 0
+        if (isGameOver == true)
         {
-            //uses the p button to pause and unpause the game
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                PauseControl();
-            }
+            HideGameOver();
         }
     }
 
@@ -47,7 +56,7 @@ public class UIManagerScript : MonoBehaviour
     }
 
     //controls the pausing of the scene
-    void PauseControl()
+    public void PauseControl()
     {
         if (Time.timeScale == 1)
         {
@@ -56,8 +65,8 @@ public class UIManagerScript : MonoBehaviour
         }
         else if (Time.timeScale == 0)
         {
-            Time.timeScale = 1;
             HidePaused();
+            Time.timeScale = 1;
         }
     }
 
@@ -104,14 +113,16 @@ public class UIManagerScript : MonoBehaviour
     {
         if(isGameOver == true)
         {
+            Time.timeScale = 0;
             foreach (GameObject g in gameOverObjects)
             {
                 g.SetActive(true);
             }
         }
 
-        else
+        else if (isGameOver == false)
         {
+            Time.timeScale = 1;
             foreach (GameObject g in gameOverObjects)
             {
                 g.SetActive(false);

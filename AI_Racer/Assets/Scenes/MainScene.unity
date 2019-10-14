@@ -1177,7 +1177,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: -4672683231744721805, guid: a7a3b3985bf541c4ea970750b901a224,
           type: 3}
-        m_MethodName: HidePaused
+        m_MethodName: PauseControl
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
