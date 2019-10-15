@@ -7,7 +7,6 @@ TagManager:
   - ShowOnPause
   - CarSelectFSM
   - CarSelectFuzzy
-  - GameOver
   - Enemies
   - Music
   layers:

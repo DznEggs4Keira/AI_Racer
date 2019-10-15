@@ -6,9 +6,6 @@ using UnityEngine.SceneManagement;
 public class UIManagerScript : MonoBehaviour
 {
     GameObject[] pauseObjects;
-    GameObject[] gameOverObjects;
-
-    public bool isGameOver;
 
     // Use this for initialization
     void Start()
@@ -16,11 +13,7 @@ public class UIManagerScript : MonoBehaviour
         Time.timeScale = 1;
 
         pauseObjects = GameObject.FindGameObjectsWithTag("ShowOnPause");
-        gameOverObjects = GameObject.FindGameObjectsWithTag("GameOver");
 
-        isGameOver = false;
-
-        HideGameOver();
         HidePaused();
     }
 
@@ -28,24 +21,9 @@ public class UIManagerScript : MonoBehaviour
     void Update()
     {
         //uses the p button to pause and unpause the game
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Time.timeScale == 1 && isGameOver == false)
-            {
-                Time.timeScale = 0;
-                ShowPaused();
-            }
-            else if (Time.timeScale == 0 && isGameOver == false)
-            {
-                Time.timeScale = 1;
-                HidePaused();
-            }
-        }
-
-        //shows finish gameobjects if player is dead and timescale = 0
-        if (/* Time.timeScale == 0 && */ isGameOver == true)
-        {
-            HideGameOver();
+            PauseControl();
         }
     }
 
@@ -75,7 +53,7 @@ public class UIManagerScript : MonoBehaviour
     {
         foreach (GameObject g in pauseObjects)
         {
-            g.SetActive(true);
+            g.gameObject.SetActive(true);
         }
     }
 
@@ -84,7 +62,7 @@ public class UIManagerScript : MonoBehaviour
     {
         foreach (GameObject g in pauseObjects)
         {
-            g.SetActive(false);
+            g.gameObject.SetActive(false);
         }
     }
 
@@ -109,25 +87,8 @@ public class UIManagerScript : MonoBehaviour
         }
     }
 
-    public void HideGameOver()
+    public void GameOver()
     {
-        if(isGameOver == true)
-        {
-            Time.timeScale = 0;
-            foreach (GameObject g in gameOverObjects)
-            {
-                g.SetActive(true);
-            }
-        }
-
-        else if (isGameOver == false)
-        {
-            Time.timeScale = 1;
-            foreach (GameObject g in gameOverObjects)
-            {
-                g.SetActive(false);
-            }
-        }
-        
+        SceneManager.LoadScene("GameOverScreen");
     }
 }

@@ -18,29 +18,29 @@ public class SelectedScript : MonoBehaviour
 
     void Set()
     {
-        if(Selection.FSM)
+        if(Selection.FSM == true)
         {
-            foreach (GameObject g in FSMObjects)
+            foreach (GameObject f in FSMObjects)
             {
-                g.SetActive(true);
+                f.SetActive(true);
             }
 
-            foreach (GameObject g in FuzzyObjects)
+            foreach (GameObject f in FuzzyObjects)
             {
-                g.SetActive(false);
+                f.SetActive(false);
             }
         }
 
-        else
+        else if (Selection.FSM == false)
         {
-            foreach (GameObject g in FuzzyObjects)
+            foreach (GameObject fu in FuzzyObjects)
             {
-                g.SetActive(true);
+                fu.SetActive(true);
             }
 
-            foreach (GameObject g in FSMObjects)
+            foreach (GameObject fu in FSMObjects)
             {
-                g.SetActive(false);
+                fu.SetActive(false);
             }
         }
     }
