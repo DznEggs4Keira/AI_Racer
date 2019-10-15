@@ -51,7 +51,7 @@ public class FSMController : MonoBehaviour
             Debug.Log("AAA i hit " + collision.gameObject.tag); //this is working
             //Call game over when collision
             UIManagerScript script = UI.GetComponent<UIManagerScript>();
-            script.GameOver();
+            StartCoroutine(script.GameOver());
         }
     }
 }

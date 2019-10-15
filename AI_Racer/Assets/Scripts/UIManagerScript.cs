@@ -87,8 +87,10 @@ public class UIManagerScript : MonoBehaviour
         }
     }
 
-    public void GameOver()
+    public IEnumerator GameOver()
     {
+        yield return new WaitForSeconds(0.5f);
+
         SceneManager.LoadScene("GameOverScreen");
     }
 }
